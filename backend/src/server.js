@@ -20,7 +20,7 @@ const __dirname = path.resolve();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      
       "https://project3-kappa-pink.vercel.app"
     ],
     credentials: true, // allow cookies to be sent
