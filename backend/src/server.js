@@ -15,12 +15,18 @@ const PORT = process.env.PORT;
 
 const __dirname = path.resolve();
 
+import cors from "cors";
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true, // allow frontend to send cookies
+    origin: [
+      "http://localhost:5173", 
+      "https://project3-kappa-pink.vercel.app" 
+    ],
+    credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use(cookieParser());
