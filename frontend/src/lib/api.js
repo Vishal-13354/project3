@@ -63,3 +63,7 @@ export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
   return response.data;
 }
+axiosInstance.get("/test-cookie").then(res => {
+  console.log("Cookie test result:", res.data);
+});
+

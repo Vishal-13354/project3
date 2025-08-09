@@ -33,6 +33,14 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+app.get("/api/test-cookie", (req, res) => {
+  console.log("Cookies received:", req.cookies); // logs all cookies
+  res.json({
+    cookies: req.cookies,
+    hasJWT: Boolean(req.cookies?.jwt)
+  });
+});
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
