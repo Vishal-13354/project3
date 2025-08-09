@@ -10,8 +10,8 @@ const generateToken = (userId, res) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none", // changed from "lax" to "none"
+    secure: process.env.NODE_ENV === "production", // HTTPS in production
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 'none' for cross-site
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
@@ -91,13 +91,12 @@ export const login = async (req, res) => {
   }
 };
 
-// @desc Logout user
 export const logout = (req, res) => {
   try {
     res.cookie("jwt", "", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "none", // changed from "lax" to "none"
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       expires: new Date(0),
     });
 
@@ -108,7 +107,6 @@ export const logout = (req, res) => {
   }
 };
 
-// @desc Get current logged-in user
 export const getMe = async (req, res) => {
   try {
     res.json(req.user);
